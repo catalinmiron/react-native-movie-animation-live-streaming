@@ -1,0 +1,13 @@
+{
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": [
+    "source.organizeImports",
+    "source.fixAll.eslint"
+  ],
+  "files.eol": "\n",
+  "files.refactoring.autoSave": false,
+  "search.exclude": {
+    "**/.yarn": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
