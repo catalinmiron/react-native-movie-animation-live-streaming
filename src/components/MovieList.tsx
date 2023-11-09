@@ -79,16 +79,22 @@ export default function MovieList() {
   const flingDown = Gesture.Fling()
     .direction(Directions.DOWN)
     .onStart(() => {
-      filterAnimation.value = withTiming(filtersHeight)
+      if (filterAnimation.value === 0) {
+        filterAnimation.value = withTiming(filtersHeight)
+      }
     })
   const flingUp = Gesture.Fling()
     .direction(Directions.UP)
     .onStart(() => {
-      filterAnimation.value = withTiming(0)
+      if (filterAnimation.value === filtersHeight) {
+        filterAnimation.value = withTiming(0)
+      }
     })
 
   const tap = Gesture.Tap().onStart(() => {
-    filterAnimation.value = withTiming(0)
+    if (filterAnimation.value === filtersHeight) {
+      filterAnimation.value = withTiming(0)
+    }
   })
 
   return (
