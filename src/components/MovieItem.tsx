@@ -19,7 +19,7 @@ export function MovieItem({ item }: { item: MovieItem }) {
           uri: getImagePath(item.backdrop_path),
         }}
         contentFit="cover"
-        transition={1000}
+        transition={400}
         style={[StyleSheet.absoluteFillObject]}
       />
       <View style={[StyleSheet.absoluteFillObject, { backgroundColor: 'rgba(0,0,0,0.5)' }]} />
