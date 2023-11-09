@@ -12,6 +12,7 @@ import { DiscoverMoviesPayload, apiClient } from '../config/api'
 import { pagination$ } from '../state/carousel'
 import { filterLayout$ } from '../state/filters'
 import { moviesParams$ } from '../state/movies'
+import { Loader } from './Loader'
 import { MovieFilters } from './MovieFilters'
 import { MovieItem } from './MovieItem'
 import { MovieItemDetails } from './MovieItemDetails'
@@ -28,7 +29,7 @@ export default function MovieList() {
       const { genre, year, page } = moviesParams$.peek()
       console.log({ genre, year, page })
 
-      // await wait(1000)
+      await wait(500)
       return apiClient
         .get<DiscoverMoviesPayload>('/discover/movie', {
           params: {
@@ -101,7 +102,9 @@ export default function MovieList() {
     <View style={{ flex: 1 }}>
       <MovieFilters />
       <GestureDetector gesture={Gesture.Race(flingDown, flingUp, tap)}>
-        <Animated.View style={[moviesListStyle, { overflow: 'hidden', backgroundColor: '#000' }]}>
+        <Animated.View
+          style={[moviesListStyle, { overflow: 'hidden', backgroundColor: '#000', flex: 1 }]}
+        >
           <FlatList
             ref={flatListRef}
             data={data}
@@ -137,6 +140,7 @@ export default function MovieList() {
               <MovieItemDetails item={data[current]} />
             </View>
           )}
+          {isFetching && <Loader style={{ marginTop: 50 }} size={48} color={'#fff'} />}
         </Animated.View>
       </GestureDetector>
     </View>
