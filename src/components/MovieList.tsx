@@ -18,7 +18,7 @@ export default function MovieList() {
       const { genre, year, page } = moviesParams$.peek()
       console.log({ genre, year, page })
 
-      await wait(1000)
+      // await wait(1000)
       return apiClient
         .get<DiscoverMoviesPayload>('/discover/movie', {
           params: {
@@ -34,6 +34,7 @@ export default function MovieList() {
         .then((res) => JSON.parse(String(res.data)) as DiscoverMoviesPayload)
         .then((data) => {
           pagination$.assign({
+            current: 1,
             total: data.results.length,
           })
           return data.results
@@ -57,26 +58,27 @@ export default function MovieList() {
         }}
         onMomentumScrollEnd={(e) => {
           pagination$.assign({
-            current: Math.floor(
-              e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width
-            ),
+            current:
+              Math.floor(e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width) + 1,
           })
         }}
       />
-      <View
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          padding: 24,
-          width: '100%',
-          gap: 32,
-          paddingBottom: height * 0.15,
-          height: height * 0.3,
-        }}
-      >
-        <Pagination style={{ alignSelf: 'flex-end' }} />
-        {data && <MovieItemDetails item={data[current]} />}
-      </View>
+      {data && (
+        <View
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            padding: 24,
+            width: '100%',
+            gap: 32,
+            paddingBottom: height * 0.15,
+            height: height * 0.3,
+          }}
+        >
+          <Pagination style={{ alignSelf: 'flex-end' }} />
+          <MovieItemDetails item={data[current]} />
+        </View>
+      )}
     </View>
   )
 }

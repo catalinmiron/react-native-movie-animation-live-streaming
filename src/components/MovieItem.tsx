@@ -1,5 +1,5 @@
-// import { Image } from 'expo-image'
-import { Image, StyleSheet, View, useWindowDimensions } from 'react-native'
+import { Image } from 'expo-image'
+import { StyleSheet, View, useWindowDimensions } from 'react-native'
 import type { MovieItem } from '../config/api'
 import { getImagePath } from '../config/movies'
 
@@ -10,23 +10,19 @@ export function MovieItem({ item }: { item: MovieItem }) {
       style={{
         width,
         height,
-        backgroundColor: '#000',
         justifyContent: 'flex-end',
       }}
     >
       <Image
+        key={item.id}
         source={{
           uri: getImagePath(item.backdrop_path),
         }}
-        // contentFit="cover"
-        resizeMode="cover"
-        style={[
-          StyleSheet.absoluteFillObject,
-          {
-            opacity: 0.5,
-          },
-        ]}
+        contentFit="cover"
+        transition={1000}
+        style={[StyleSheet.absoluteFillObject]}
       />
+      <View style={[StyleSheet.absoluteFillObject, { backgroundColor: 'rgba(0,0,0,0.5)' }]} />
     </View>
   )
 }
