@@ -69,7 +69,7 @@ export default function MovieList() {
           translateY: filterAnimation.value,
         },
       ],
-      borderRadius: interpolate(filterAnimation.value, [0, filtersHeight], [0, 32]),
+      borderRadius: interpolate(filterAnimation.value, [0, filtersHeight], [0, 24]),
     }
   })
 
@@ -79,12 +79,12 @@ export default function MovieList() {
   const flingDown = Gesture.Fling()
     .direction(Directions.DOWN)
     .onStart(() => {
-      filterAnimation.value = withTiming(filtersHeight, { duration: 2000 })
+      filterAnimation.value = withTiming(filtersHeight)
     })
   const flingUp = Gesture.Fling()
     .direction(Directions.UP)
     .onStart(() => {
-      filterAnimation.value = withTiming(0, { duration: 2000 })
+      filterAnimation.value = withTiming(0)
     })
 
   return (
