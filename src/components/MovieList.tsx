@@ -87,10 +87,14 @@ export default function MovieList() {
       filterAnimation.value = withTiming(0)
     })
 
+  const tap = Gesture.Tap().onStart(() => {
+    filterAnimation.value = withTiming(0)
+  })
+
   return (
     <View style={{ flex: 1 }}>
       <MovieFilters />
-      <GestureDetector gesture={Gesture.Race(flingUp, flingDown)}>
+      <GestureDetector gesture={Gesture.Race(flingDown, flingUp, tap)}>
         <Animated.View style={[moviesListStyle, { overflow: 'hidden', backgroundColor: '#000' }]}>
           <FlatList
             ref={flatListRef}
