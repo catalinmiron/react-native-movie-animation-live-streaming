@@ -18,9 +18,7 @@ export function MovieItemDetails({ item }: { item: MovieItem }) {
       </Text>
       <Text style={styles.title}>{item.title}</Text>
       <View style={{ flexDirection: 'row', columnGap: 8, alignItems: 'center' }}>
-        <Text style={styles.text}>{item.release_date}</Text>
-        <Entypo name="dot-single" size={14} color={'white'} />
-        <Text style={styles.text}>1h 51m</Text>
+        <Text style={styles.text}>{new Date(item.release_date).getFullYear()}</Text>
         <Entypo name="dot-single" size={14} color={'white'} />
         <View style={{ flexDirection: 'row', columnGap: 2, alignItems: 'center' }}>
           <AntDesign name="star" size={8} color="white" />
