@@ -5,7 +5,7 @@ import { pagination$ } from '../state/carousel'
 
 export function Pagination({ style }: { style: ViewStyle }) {
   const total = pagination$.total.get()
-  const current = pagination$.current.get()
+  const current = pagination$.current.get() + 1
   return (
     <View
       style={[
